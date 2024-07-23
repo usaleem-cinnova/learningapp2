@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Check Directory
-        run: dir ${{ github.workspace }}/published
+        run: dir "\published\"
     
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
