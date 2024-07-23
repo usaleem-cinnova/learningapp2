@@ -23,7 +23,7 @@ jobs:
         run: nuget restore
 
       - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Publish /p:PublishProfile=FolderProfile /p:OutDir=${{ github.workspace }}/published/
+        run: msbuild /nologo /verbosity:m /t:Publish /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
 
       - name: List files in published folder
         run: dir ${{ github.workspace }}/published
