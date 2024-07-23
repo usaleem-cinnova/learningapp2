@@ -25,6 +25,9 @@ jobs:
       - name: Publish to folder
         run: msbuild /nologo /verbosity:m /t:Publish /p:PublishProfile=FolderProfile /p:OutDir=${{ github.workspace }}/published/
 
+      - name: Debug: List files in published folder
+        run: dir ${{ github.workspace }}/published
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -46,6 +49,9 @@ jobs:
         with:
           name: ASP-app
       
+      - name: Debug: List files in published folder
+        run: dir ASP-app
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -59,4 +65,4 @@ jobs:
         with:
           app-name: 'learning1234'
           slot-name: 'Production'
-          package: published
+          package: ASP-app
