@@ -23,13 +23,13 @@ jobs:
         run: nuget restore
 
       - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Publish /p:PublishProfile=FolderProfile /p:OutDir="$(Build.ArtifactStagingDirectory)/published/"
+        run: msbuild /nologo /verbosity:m /t:Publish /p:PublishProfile=FolderProfile /p:OutDir=$(System.DefaultWorkingDirectory)/published/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: ASP-app
-          path: $(Build.ArtifactStagingDirectory)/published/**
+          path: published/**
 
   deploy:
     runs-on: windows-latest
@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'learning1234'
           slot-name: 'Production'
-          package: $(Build.ArtifactStagingDirectory)/published
+          package: published
