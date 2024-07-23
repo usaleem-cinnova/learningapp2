@@ -45,9 +45,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ASP-app
-      
-      - name: Debug: List files in published folder
-        run: dir ASP-app
 
       - name: Login to Azure
         uses: azure/login@v2
