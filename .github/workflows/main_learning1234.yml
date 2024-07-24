@@ -23,13 +23,13 @@ jobs:
         run: nuget restore
 
       - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="${{ github.workspace }}\published\"
+        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="${{ github.workspace }}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: ASP-app
-          path: ${{ github.workspace }}\published\**
+          path: ${{ github.workspace }}
 
   deploy:
     runs-on: windows-latest
@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: List files in downloaded artifact
-        run: dir ${{ github.workspace }}\published\**
+        run: dir ${{ github.workspace }}
         
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
