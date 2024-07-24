@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ASP-app
-          path: ${{ github.workspace }}/published/**
+          path: ${{ github.workspace }}/published/
 
   deploy:
     runs-on: windows-latest
